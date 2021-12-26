@@ -1,7 +1,7 @@
 <?php
 
 
-namespace app\Models\Traits;
+namespace App\Models\Traits;
 
 
 trait Uuid

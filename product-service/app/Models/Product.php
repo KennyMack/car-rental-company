@@ -11,16 +11,18 @@ class Product extends Model
     use Uuid;
     use HasFactory;
 
+    protected $table = 'Products';
+
     public $incrementing = false;
 
     protected $keyType = "string";
 
     protected $fillable = [
         'id',
-        'Name',
-        'Description',
-        'Price',
-        'QtdAvailable',
-        'QtdTotal'
+        'name',
+        'description',
+        'price',
+        'qtdAvailable',
+        'qtdTotal'
     ];
 }
