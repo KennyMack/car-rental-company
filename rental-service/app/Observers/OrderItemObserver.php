@@ -28,8 +28,8 @@ class OrderItemObserver
     public function updated(OrderItem $orderItem)
     {
         $orderItem->adjustTotalValueAndPrice();
-        $orderItem->order->first()->adjustTotal();
-        $orderItem->order->first()->adjustBalance();
+        $orderItem->order->adjustTotal();
+        $orderItem->order->adjustBalance();
     }
 
     /**

@@ -2,11 +2,16 @@
 
 namespace App\Providers;
 
+use App\FormFields\DateTimeFormField;
+use App\FormFields\NumericFormField;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Payment;
 use App\Observers\OrderItemObserver;
 use App\Observers\OrderObserver;
+use App\Observers\PaymentObserver;
 use Illuminate\Support\ServiceProvider;
+use TCG\Voyager\Facades\Voyager;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,6 +23,8 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        Voyager::addFormField(NumericFormField::class);
+        Voyager::addFormField(DateTimeFormField::class);
     }
 
     /**
@@ -27,7 +34,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
         Order::observe(OrderObserver::class);
         OrderItem::observe(OrderItemObserver::class);
+        Payment::observe(PaymentObserver::class);
     }
 }

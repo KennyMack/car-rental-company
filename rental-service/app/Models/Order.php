@@ -44,7 +44,7 @@ class Order extends Model
 
     public function items()
     {
-        return $this->hasMany('\App\Models\OrderItem');
+        return $this->hasMany(OrderItem::class);
     }
 
     public function customer()
@@ -103,7 +103,7 @@ class Order extends Model
         $totalItems = 0;
         foreach ($this->items as $item)
         {
-            $totalItems += $item->price * $item->qtd;
+            $totalItems += $item->product->price * $item->qtd;
         }
 
         return $totalItems;

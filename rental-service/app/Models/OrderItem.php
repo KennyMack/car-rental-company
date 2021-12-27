@@ -38,11 +38,33 @@ class OrderItem extends Model
 
     public function order()
     {
-        return $this->belongsTo('App\Models\Order');
+        return $this->belongsTo(Order::class);
     }
 
     public function adjustTotalValueAndPrice()
     {
+        // throw '0';
+        $total = $this->price * $this->qtd;
+        if (($this->price != $this->product->price && isset($this->product->price)) ||
+            $total != $this->total)
+        {
+            $this->price = ($this->product->price) ?? 0;
+            $this->total = $this->price * $this->qtd;
+            $this->save();
+        }
+
+        // $this->price = $item->product->price;
+        // $this->total = 15;
+
+        // $totalPrice = $this->product->price * $this->qtd;
+        //
+        // if ($totalPrice != $this->total) {
+        //     $this->price = $this->product->price;
+        //     $this->total = $this->product->price * $this->qtd;
+        //     $this->save();
+        // }
+
+        /*
         $price = $this->product->price;
         if ($this->price != $price)
             $this->price = $this->product->price;
@@ -52,5 +74,6 @@ class OrderItem extends Model
             $this->total = $this->price * $this->qtd;
             $this->save();
         }
+        */
     }
 }
