@@ -6,12 +6,12 @@ use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class Payment extends Model
 {
     use Uuid;
     use HasFactory;
 
-    protected $table = 'Orders';
+    protected $table = 'Payments';
 
     public $incrementing = false;
 
@@ -19,26 +19,33 @@ class Order extends Model
 
     protected $fillable = [
         'id',
+        'order_id',
         'customer_id',
-        'status',
-        'discount',
-        'total',
-        'order_date'
+        'payment_type',
+        'description',
+        'amount',
+        'payment_date'
     ];
 
     protected $casts = [
-        'order_date' => 'date',
-        'total' => 'float',
-        'discount' => 'float'
+        'payment_date' => 'date',
+        'amount' => 'float'
     ];
 
-    public function items()
+    public $additional_attributes = ['customer'];
+
+    public function getCustomerAttribute($value)
     {
-        return $this->hasMany(OrderItem::class);
+        return $this->customer()->get('name');
     }
 
     public function customer()
     {
         return $this->belongsTo(Customer::class);
+    }
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
     }
 }
