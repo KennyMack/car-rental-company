@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Product extends Migration
+class CreateProductTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,10 +16,6 @@ class Product extends Migration
         Schema::create('Products', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name', 120);
-            $table->string('description', 255)->nullable();
-            $table->decimal('price')->unique();
-            $table->decimal('qtdAvailable')->default(0);
-            $table->decimal('qtdTotal')->default(0);
             $table->timestamps();
         });
     }
@@ -32,6 +28,5 @@ class Product extends Migration
     public function down()
     {
         Schema::dropIfExists('Products');
-        //
     }
 }
