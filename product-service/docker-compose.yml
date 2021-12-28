@@ -16,8 +16,6 @@ services:
         depends_on:
             - product_service_mysql
             - product_service_redis
-        networks:
-            - product_service_net
 
     product_service_mysql:
         image: mysql:5.7.22
@@ -34,8 +32,6 @@ services:
             - 3306:3306
         volumes:
             - ./.docker/mysql:/var/lib/mysql
-        networks:
-            - product_service_net
 
     product_service_nginx:
         image: nginx:1.17-alpine
@@ -46,18 +42,15 @@ services:
         volumes:
             - ./:/var/www
             - ./.docker/nginx:/etc/nginx/conf.d
-        networks:
-            - product_service_net
 
     product_service_redis:
         image: redis:alpine
         container_name: product_service_cache
         expose:
             - 6379
-        networks:
-            - product_service_net
 
 networks:
-    product_service_net:
-        driver: bridge
+    default:
+        external:
+            name: rental_service_net
 

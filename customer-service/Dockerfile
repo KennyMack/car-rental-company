@@ -8,9 +8,12 @@ ARG uid
 RUN apt-get update && apt-get install -y \
     git \
     curl \
+    build-essential \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
+    librdkafka-dev \
+    nano \
     openssl \
     bash \
     default-mysql-client \
@@ -24,6 +27,11 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd
+
+RUN pecl install rdkafka
+
+RUN ln -s /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini && \
+    echo "extension=rdkafka.so" >> /usr/local/etc/php/php.ini
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
