@@ -18,6 +18,6 @@ Route::get('/', function () {
 });
 
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Voyager::routes();
 });
