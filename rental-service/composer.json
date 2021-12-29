@@ -11,8 +11,9 @@
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
+        "ramsey/uuid": "4.2.3",
         "tcg/voyager": "^1.5",
-        "ramsey/uuid": "4.2.3"
+        "wesleywillians/phpeasykafka": "dev-master"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
