@@ -41,4 +41,10 @@ class Order extends Model
     {
         return $this->belongsTo(Customer::class);
     }
+
+    public function delete()
+    {
+        $this->items()->delete();
+        return parent::delete();
+    }
 }
