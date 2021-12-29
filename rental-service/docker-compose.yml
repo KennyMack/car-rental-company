@@ -44,7 +44,7 @@ services:
         container_name: rental_service_server
         restart: always
         ports:
-            - 8003:80
+            - 8003:8003
         volumes:
             - ./:/var/www
             - ./.docker/nginx:/etc/nginx/conf.d
